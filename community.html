@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c050b" />
+    <title>Join the Developer Community | Nanati Abdisa</title>
+    <link rel="stylesheet" href="community.css" />
+  </head>
+  <body class="community-page">
+    <main class="community-registration-card">
+      <a class="community-back-link" href="index.html#community">← Back to portfolio</a>
+      <h1 class="community-registration-heading">Community registration</h1>
+
+      <form class="community-registration-form" id="comm-registration-form">
+        <div class="community-form-field">
+          <label for="comm-input-name">Full name *</label>
+          <input id="comm-input-name" name="name" type="text" autocomplete="name" required />
+        </div>
+
+        <div class="community-form-field">
+          <label for="comm-input-github">GitHub username *</label>
+          <input
+            id="comm-input-github"
+            name="githubUsername"
+            type="text"
+            autocomplete="username"
+            pattern="[A-Za-z0-9-]+"
+            title="Use only letters, numbers, and hyphens."
+            required
+          />
+        </div>
+
+        <div class="community-form-field community-form-field-full">
+          <label for="comm-input-url">GitHub profile URL</label>
+          <input id="comm-input-url" name="githubUrl" type="url" readonly />
+        </div>
+
+        <div class="community-form-field">
+          <label for="comm-input-email">Email address (optional)</label>
+          <input id="comm-input-email" name="email" type="email" autocomplete="email" />
+        </div>
+
+        <div class="community-form-field">
+          <label for="comm-select-area">Area of interest *</label>
+          <select id="comm-select-area" name="areaOfInterest" required>
+            <option value="Web Development">Web Development</option>
+            <option value="Mobile Development">Mobile Development</option>
+            <option value="AI &amp; Machine Learning">AI &amp; Machine Learning</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Cloud &amp; DevOps">Cloud &amp; DevOps</option>
+          </select>
+        </div>
+
+        <div class="community-form-field community-form-field-full">
+          <label for="comm-input-bio">Short bio or what you're building (optional)</label>
+          <textarea id="comm-input-bio" name="bio" maxlength="500"></textarea>
+        </div>
+
+        <button class="community-submit-button" type="submit">Submit registration</button>
+      </form>
+      <p class="community-form-status" id="community-form-status" role="status" aria-live="polite"></p>
+    </main>
+    <script src="community.js"></script>
+  </body>
+</html>

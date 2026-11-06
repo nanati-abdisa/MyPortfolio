@@ -1,0 +1,46 @@
+[
+  {
+    "id": "mem-1",
+    "name": "Nanati Abdisa",
+    "githubUsername": "nanati-abdisa",
+    "githubUrl": "https://github.com/nanati-abdisa",
+    "email": "nanatiabdisa@gmail.com",
+    "areaOfInterest": "Web Development",
+    "consent": true,
+    "joinedAt": "2026-10-01T10:00:00.000Z",
+    "bio": "Founder & Student Developer passionate about building modern web applications."
+  },
+  {
+    "id": "mem-2",
+    "name": "Dawit Tadesse",
+    "githubUsername": "dawittad",
+    "githubUrl": "https://github.com/dawittad",
+    "email": "dawit.dev@example.com",
+    "areaOfInterest": "AI & Machine Learning",
+    "consent": true,
+    "joinedAt": "2026-10-18T14:30:00.000Z",
+    "bio": "Exploring neural networks, computer vision, and building AI-driven solutions."
+  },
+  {
+    "id": "mem-3",
+    "name": "Selamawit Bekele",
+    "githubUsername": "selam-bekele",
+    "githubUrl": "https://github.com/selam-bekele",
+    "email": "selam.sec@example.com",
+    "areaOfInterest": "Cybersecurity",
+    "consent": true,
+    "joinedAt": "2026-10-24T09:15:00.000Z",
+    "bio": "Ethical hacking enthusiast, web security researcher, and CTF solver."
+  },
+  {
+    "id": "mem-4",
+    "name": "Yohannes Haile",
+    "githubUsername": "yohannes-h",
+    "githubUrl": "https://github.com/yohannes-h",
+    "email": "yohannes.mobile@example.com",
+    "areaOfInterest": "Mobile Development",
+    "consent": true,
+    "joinedAt": "2026-11-02T16:45:00.000Z",
+    "bio": "Flutter and Android developer crafting fluid, accessible mobile experiences."
+  }
+]

@@ -1,0 +1,2402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <title>Nanati Abdisa | Portfolio</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-dark: #070206;
+        --card-bg: transparent;
+        --card-border: rgba(255, 45, 120, 0.4);
+        --card-border-hover: #ff2d78;
+        --pink-primary: #ff2d78;
+        --pink-light: #ff75a0;
+        --pink-glow: rgba(255, 45, 120, 0.35);
+        --text-main: #ffffff;
+        --text-muted: #bda6b5;
+        --radius-lg: 22px;
+        --radius-md: 14px;
+        --radius-pill: 50px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 45, 120, 0.3) var(--bg-dark);
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+        text-shadow:
+          0 1px 4px rgba(0, 0, 0, 0.9),
+          0 2px 8px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Minimalist sleek scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 45, 120, 0.3);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--pink-primary);
+      }
+
+      #viewport {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      #viewport canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Main content container */
+      #content-wrapper {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 12px 16px 40px;
+      }
+
+      /* Navigation Bar */
+      header {
+        position: sticky;
+        top: 16px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 24px;
+        background: transparent;
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius-pill);
+        box-shadow: none;
+        margin-bottom: 36px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+
+      .brand-icon {
+        color: var(--pink-primary);
+        font-weight: 800;
+        font-size: 1.4rem;
+        letter-spacing: -1px;
+        text-shadow: 0 0 12px var(--pink-glow);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.25s ease;
+        position: relative;
+        padding: 4px 2px;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: #ffffff;
+      }
+
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--pink-primary);
+        border-radius: 2px;
+        box-shadow: 0 0 8px var(--pink-primary);
+      }
+
+      .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        background: rgba(255, 45, 120, 0.12);
+        border: 1px solid rgba(255, 45, 120, 0.4);
+        color: #ffffff;
+        padding: 8px 20px;
+        border-radius: var(--radius-pill);
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background: var(--pink-primary);
+        border-color: var(--pink-primary);
+        box-shadow: 0 0 20px rgba(255, 45, 120, 0.6);
+        transform: translateY(-1px);
+      }
+
+      /* Common Card Styles */
+      .glass-card {
+        background: var(--card-bg);
+        border: 1px solid transparent;
+        border-radius: var(--radius-lg);
+        padding: 28px;
+        box-shadow: none;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease,
+          background-color 0.35s ease;
+      }
+
+      .glass-card:hover {
+        border-color: var(--card-border-hover);
+        box-shadow: 0 0 18px rgba(255, 45, 120, 0.18);
+      }
+
+      @media (hover: none) {
+        .glass-card:hover {
+          border-color: transparent;
+          box-shadow: none;
+        }
+      }
+
+      /* Diagonal striped corners from design guide */
+      .striped-corner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .striped-corner::after {
+        content: "";
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 80px;
+        height: 80px;
+        background: repeating-linear-gradient(
+          -45deg,
+          rgba(255, 45, 120, 0.4),
+          rgba(255, 45, 120, 0.4) 3px,
+          transparent 3px,
+          transparent 10px
+        );
+      }
+
+      /* Typography & Utilities */
+      .gradient-text {
+        background: linear-gradient(135deg, #ff2d78 0%, #ff75a0 100%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+      }
+
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+        color: #ffffff;
+      }
+
+      .card-title-icon {
+        color: var(--pink-primary);
+        display: flex;
+        align-items: center;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        padding: 11px 22px;
+        border-radius: var(--radius-pill);
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #ff2d78, #d8145e);
+        color: #ffffff;
+        border: none;
+        box-shadow: 0 4px 18px rgba(255, 45, 120, 0.45);
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 6px 25px rgba(255, 45, 120, 0.7);
+        transform: translateY(-2px);
+      }
+
+      .btn-glass {
+        background: rgba(255, 255, 255, 0.06);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+      }
+
+      .btn-glass:hover {
+        background: rgba(255, 45, 120, 0.15);
+        border-color: rgba(255, 45, 120, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .btn-linkedin {
+        border-color: rgba(10, 102, 194, 0.4);
+      }
+      .btn-linkedin:hover {
+        background: rgba(10, 102, 194, 0.2);
+        border-color: #0a66c2;
+      }
+
+      /* Grid Layouts */
+      .bento-grid-top {
+        display: grid;
+        grid-template-columns: 1.35fr 1fr 0.9fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .bento-grid-mid {
+        display: grid;
+        grid-template-columns: 1.15fr 1.45fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .bento-grid-bot {
+        display: grid;
+        grid-template-columns: 1fr 1.25fr;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      /* Hero Section */
+      .hero-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 36px 32px;
+      }
+
+      .welcome-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: rgba(255, 45, 120, 0.12);
+        border: 1px solid rgba(255, 45, 120, 0.35);
+        border-radius: var(--radius-pill);
+        color: var(--pink-light);
+        font-size: 0.88rem;
+        font-weight: 500;
+        width: fit-content;
+        margin-bottom: 20px;
+      }
+
+      .hero-title {
+        font-size: 2.85rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin-bottom: 12px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.22rem;
+        font-weight: 600;
+        color: #f0e6ed;
+        margin-bottom: 14px;
+      }
+
+      .hero-desc {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        line-height: 1.6;
+        max-width: 440px;
+        margin-bottom: 28px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      /* About Card */
+      .about-bio {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.65;
+        margin-bottom: 22px;
+      }
+
+      .meta-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.92rem;
+        color: #f1e5ee;
+      }
+
+      .meta-icon {
+        color: var(--pink-primary);
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+      }
+
+      /* Goals Card */
+      .goals-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 8px;
+      }
+
+      .goal-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: #f5edf3;
+      }
+
+      .goal-check {
+        color: var(--pink-primary);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* Skills & Technologies */
+      .card-header-action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .view-all-link {
+        color: var(--pink-light);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition:
+          gap 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .view-all-link:hover {
+        color: #ffffff;
+        gap: 8px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+
+      .skill-box {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-md);
+        padding: 14px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .skill-box:hover {
+        background: rgba(255, 45, 120, 0.08);
+        border-color: rgba(255, 45, 120, 0.35);
+        transform: translateY(-3px);
+      }
+
+      .skill-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin-bottom: 8px;
+      }
+
+      .skill-name {
+        font-size: 0.84rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #fff;
+      }
+
+      .skill-progress-row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+      }
+
+      .skill-bar-track {
+        flex: 1;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .skill-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #ff2d78, #ff75a0);
+        border-radius: 4px;
+        width: 0%;
+        transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .is-visible .skill-bar-fill {
+        width: var(--w);
+      }
+
+      .skill-pct {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-muted);
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .project-card {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-md);
+        padding: 18px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover {
+        background: rgba(255, 45, 120, 0.08);
+        border-color: rgba(255, 45, 120, 0.35);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      .project-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+      }
+
+      .icon-dorm {
+        background: rgba(156, 39, 176, 0.2);
+        color: #ce93d8;
+      }
+      .icon-budget {
+        background: rgba(0, 216, 255, 0.2);
+        color: #00d8ff;
+      }
+      .icon-reg {
+        background: rgba(255, 45, 120, 0.2);
+        color: #ff75a0;
+      }
+
+      .project-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+
+      .project-desc {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 16px;
+        min-height: 48px;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+
+      .tag {
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.08);
+        color: #e5d8e2;
+      }
+
+      .tag-react {
+        background: rgba(0, 216, 255, 0.15);
+        color: #00d8ff;
+      }
+      .tag-node {
+        background: rgba(139, 195, 74, 0.15);
+        color: #aed581;
+      }
+      .tag-mongo {
+        background: rgba(76, 175, 80, 0.15);
+        color: #81c784;
+      }
+      .tag-java {
+        background: rgba(255, 87, 34, 0.15);
+        color: #ff8a65;
+      }
+      .tag-oop {
+        background: rgba(171, 71, 188, 0.15);
+        color: #ba68c8;
+      }
+      .tag-html {
+        background: rgba(244, 81, 30, 0.15);
+        color: #ff7043;
+      }
+      .tag-css {
+        background: rgba(33, 150, 243, 0.15);
+        color: #64b5f6;
+      }
+      .tag-js {
+        background: rgba(255, 214, 0, 0.15);
+        color: #ffd54f;
+      }
+
+      .project-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 8px 14px;
+        font-size: 0.84rem;
+      }
+
+      /* Tools & Platforms */
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 12px;
+      }
+
+      .tool-box {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-md);
+        padding: 14px 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.25s ease;
+      }
+
+      .tool-box:hover {
+        background: rgba(255, 45, 120, 0.08);
+        border-color: rgba(255, 45, 120, 0.35);
+        transform: translateY(-3px);
+      }
+
+      .tool-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tool-name {
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      /* Contact Me */
+      .contact-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .contact-info-block {
+        flex: 1;
+      }
+
+      .contact-sub {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        margin-bottom: 16px;
+      }
+
+      .contact-meta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 24px;
+      }
+
+      .contact-meta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #f1e5ee;
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color 0.2s ease;
+      }
+
+      .contact-meta-link:hover {
+        color: var(--pink-light);
+      }
+
+      .contact-action {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .contact-whatsapp-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 14px 20px;
+        border: 1px solid rgba(37, 211, 102, 0.55);
+        border-radius: var(--radius-pill);
+        background: rgba(37, 211, 102, 0.12);
+        color: #fff;
+        font-size: 0.92rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .contact-whatsapp-button:hover {
+        border-color: #25d366;
+        background: rgba(37, 211, 102, 0.22);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 24px 0 10px 0;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+      }
+
+      .heart-icon {
+        color: var(--pink-primary);
+        display: inline-block;
+      }
+
+      /* Scroll Trigger Animation System */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+      }
+
+      .animate-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .delay-1 {
+        transition-delay: 0.1s;
+      }
+      .delay-2 {
+        transition-delay: 0.2s;
+      }
+      .delay-3 {
+        transition-delay: 0.3s;
+      }
+      .delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      @media (max-width: 768px) {
+        .animate-on-scroll {
+          transform: translateY(16px);
+          transition-duration: 0.65s;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .animate-on-scroll,
+        .animate-on-scroll.is-visible {
+          opacity: 1;
+          transform: none;
+          transition: none;
+          will-change: auto;
+        }
+      }
+
+      /* Responsive Breakpoints */
+      @media (max-width: 1080px) {
+        .bento-grid-top {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-card {
+          grid-column: span 2;
+        }
+        .bento-grid-mid {
+          grid-template-columns: 1fr;
+        }
+        .bento-grid-bot {
+          grid-template-columns: 1fr;
+        }
+        .tools-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        #content-wrapper {
+          padding: 10px 12px 32px;
+        }
+
+        header {
+          padding: 10px 16px;
+          margin-bottom: 24px;
+        }
+
+        nav {
+          gap: 14px;
+        }
+
+        .nav-link {
+          font-size: 0.85rem;
+        }
+
+        .nav-btn {
+          display: none; /* Keep header compact on mobile */
+        }
+
+        .bento-grid-top {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-card {
+          grid-column: span 1;
+          padding: 24px 18px;
+        }
+
+        .hero-title {
+          font-size: 2.1rem;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tools-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .contact-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .contact-meta-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-action {
+          width: 100%;
+        }
+
+        .contact-action .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .contact-whatsapp-button {
+          width: 100%;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="pms.css" />
+    <link rel="stylesheet" href="community.css" />
+  </head>
+  <body>
+    <div id="viewport" aria-hidden="true">
+      <canvas id="canvas"></canvas>
+    </div>
+    <!-- Portfolio Content Layer -->
+    <div id="content-wrapper">
+      <!-- Header / Navigation -->
+      <header>
+        <a href="#home" class="nav-brand">
+          <span class="brand-icon">&lt;/&gt;</span>
+        </a>
+        <nav>
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#community" class="nav-link">Community</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <a href="mailto:nanatinani912@gmail.com" class="nav-btn">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          <span>Let's Talk</span>
+        </a>
+      </header>
+
+      <!-- Top Bento Row: Hero + About Me + My Goals -->
+      <div class="bento-grid-top">
+        <!-- Hero Card -->
+        <section id="home" class="glass-card hero-card animate-on-scroll">
+          <div class="welcome-pill">
+            <span>👋</span>
+            <span>Welcome to my Portfolio</span>
+          </div>
+          <h1 class="hero-title">
+            Nanati <span class="gradient-text">Abdisa</span>
+          </h1>
+          <h2 class="hero-subtitle">
+            Computer Science Student & Web Developer
+          </h2>
+          <p class="hero-desc">
+            I build modern, fast and user-friendly web applications with clean
+            code and creative design.
+          </p>
+          <div class="hero-buttons">
+            <a
+              href="https://github.com/nanati-abdisa"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-glass"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                />
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/nanati-abdisa"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-glass btn-linkedin"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#0a66c2">
+                <path
+                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"
+                />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="#projects" class="btn btn-primary">
+              <span>View My Projects</span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- About Me Card -->
+        <section id="about" class="glass-card animate-on-scroll delay-1">
+          <h3 class="card-title">
+            <span class="card-title-icon">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <span>About Me</span>
+          </h3>
+          <p class="about-bio">
+            I'm a Computer Science student, passionate about web development,
+            problem solving, and new technologies. I aim to build innovative
+            solutions and grow as a developer.
+          </p>
+          <div class="meta-list">
+            <div class="meta-item">
+              <svg
+                class="meta-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+              </svg>
+              <span>Student • Computer Science</span>
+            </div>
+            <div class="meta-item">
+              <svg
+                class="meta-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Ethiopia</span>
+            </div>
+            <div class="meta-item">
+              <svg
+                class="meta-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>nanatiabdisa@gmail.com</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- My Goals Card -->
+        <section class="glass-card animate-on-scroll delay-2">
+          <div class="striped-corner"></div>
+          <h3 class="card-title">
+            <span class="card-title-icon">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </span>
+            <span>My Goals</span>
+          </h3>
+          <div class="goals-list">
+            <div class="goal-item">
+              <svg
+                class="goal-check"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Become a professional full-stack developer</span>
+            </div>
+            <div class="goal-item">
+              <svg
+                class="goal-check"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Contribute to open source</span>
+            </div>
+            <div class="goal-item">
+              <svg
+                class="goal-check"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Build impactful projects</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Mid Bento Row: Skills & Technologies + My Projects -->
+      <div class="bento-grid-mid">
+        <!-- Skills Card -->
+        <section id="skills" class="glass-card animate-on-scroll">
+          <div class="card-header-action">
+            <h3 class="card-title" style="margin-bottom: 0">
+              <span class="card-title-icon">&lt;/&gt;</span>
+              <span>Skills & Technologies</span>
+            </h3>
+            <a href="#skills" class="view-all-link">
+              <span>View All</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="skills-grid">
+            <!-- HTML -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(228, 77, 38, 0.15)"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e44d26">
+                  <path
+                    d="M12 2L3 5v14l9 3 9-3V5l-9-3zm0 2.2l6.8 2.3v10.8L12 19.6l-6.8-2.3V6.5L12 4.2zM7.5 8h9v2H10v1.5h6.5V15L12 16.5 7.5 15v-1.5H9v.5l3 1 3-1V13H7.5V8z"
+                  />
+                </svg>
+              </div>
+              <span class="skill-name">HTML</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 95%"></div>
+                </div>
+                <span class="skill-pct">95%</span>
+              </div>
+            </div>
+
+            <!-- CSS -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(33, 150, 243, 0.15)"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#2196f3">
+                  <path
+                    d="M12 2L3 5v14l9 3 9-3V5l-9-3zm0 2.2l6.8 2.3v10.8L12 19.6l-6.8-2.3V6.5L12 4.2zm-4.5 4h9v2H9.5v1.5h7V15L12 16.5 7.5 15v-1.5H9v.5l3 1 3-1V13H7.5V8.2z"
+                  />
+                </svg>
+              </div>
+              <span class="skill-name">CSS</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 90%"></div>
+                </div>
+                <span class="skill-pct">90%</span>
+              </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(255, 214, 0, 0.15)"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffd600">
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="3"
+                    fill="#ffd600"
+                  />
+                  <path
+                    d="M12 17.5c-.8 0-1.4-.4-1.6-1.1l1.5-.9c.1.3.4.5.8.5.5 0 .8-.3.8-.9v-5.6h1.8v5.7c0 1.5-.9 2.3-2.5 2.3zm5.7-.1c-.9.5-2 .7-2.9.4-.7-.2-1.3-.7-1.6-1.4l1.6-.9c.2.4.4.7.7.8.4.1.9.1 1.3-.1.4-.2.6-.6.6-1 0-.4-.2-.7-.7-.9l-1-.4c-1-.4-1.6-1-1.6-2 0-.8.4-1.5 1-1.9.8-.5 1.8-.6 2.6-.4.6.2 1.2.6 1.5 1.2l-1.5.9c-.2-.4-.4-.6-.7-.7-.4-.1-.8-.1-1.1 0-.3.2-.5.5-.5.8 0 .4.3.7.8.9l1 .4c1.1.4 1.8 1.1 1.8 2.1 0 .9-.4 1.7-1.4 2.2z"
+                    fill="#070206"
+                  />
+                </svg>
+              </div>
+              <span class="skill-name">JavaScript</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 92%"></div>
+                </div>
+                <span class="skill-pct">92%</span>
+              </div>
+            </div>
+
+            <!-- Java -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(244, 67, 54, 0.15)"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#f44336">
+                  <path
+                    d="M4 19h16v2H4zm14-9h-2V7h2a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-2v2h-2V7H6v7a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4zm0 2a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-2v3zM9 2c1 1 1 2 0 3-1 1-1 2 0 3h2c-1-1-1-2 0-3 1-1 1-2 0-3zm4 0c1 1 1 2 0 3-1 1-1 2 0 3h2c-1-1-1-2 0-3 1-1 1-2 0-3z"
+                  />
+                </svg>
+              </div>
+              <span class="skill-name">Java</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 88%"></div>
+                </div>
+                <span class="skill-pct">88%</span>
+              </div>
+            </div>
+
+            <!-- C++ -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(0, 140, 255, 0.15)"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#008cff">
+                  <path
+                    d="M12 2L3 7v10l9 5 9-5V7l-9-5zm-2 13.5c-2 0-3.5-1.5-3.5-3.5s1.5-3.5 3.5-3.5c1.2 0 2.2.5 2.8 1.4l-1.5 1c-.3-.5-.8-.8-1.3-.8-1.1 0-1.9.8-1.9 1.9s.8 1.9 1.9 1.9c.5 0 1-.3 1.3-.8l1.5 1c-.6.9-1.6 1.4-2.8 1.4zm6.5-2.5h-1v1h-1v-1h-1v-1h1v-1h1v1h1v1zm3 0h-1v1h-1v-1h-1v-1h1v-1h1v1h1v1z"
+                  />
+                </svg>
+              </div>
+              <span class="skill-name">C++</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 85%"></div>
+                </div>
+                <span class="skill-pct">85%</span>
+              </div>
+            </div>
+
+            <!-- React -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(0, 216, 255, 0.15)"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#00d8ff"
+                  stroke-width="1.8"
+                >
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="10"
+                    ry="4.2"
+                    transform="rotate(0 12 12)"
+                  />
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="10"
+                    ry="4.2"
+                    transform="rotate(60 12 12)"
+                  />
+                  <ellipse
+                    cx="12"
+                    cy="12"
+                    rx="10"
+                    ry="4.2"
+                    transform="rotate(120 12 12)"
+                  />
+                  <circle cx="12" cy="12" r="1.8" fill="#00d8ff" />
+                </svg>
+              </div>
+              <span class="skill-name">React</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 90%"></div>
+                </div>
+                <span class="skill-pct">90%</span>
+              </div>
+            </div>
+
+            <!-- Bootstrap -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(121, 82, 179, 0.15)"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#7952b3">
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="4"
+                    fill="#7952b3"
+                  />
+                  <path
+                    d="M8.5 7h4c1.8 0 2.8.8 2.8 2.1 0 .9-.5 1.6-1.3 1.9 1.1.3 1.8 1.1 1.8 2.3 0 1.5-1.2 2.4-3.1 2.4H8.5V7zm2.2 3.6h1.6c.7 0 1.1-.3 1.1-.9 0-.5-.4-.8-1.1-.8h-1.6v1.7zm0 3.3h1.9c.8 0 1.3-.3 1.3-.9 0-.6-.5-.9-1.3-.9h-1.9v1.8z"
+                    fill="#ffffff"
+                  />
+                </svg>
+              </div>
+              <span class="skill-name">Bootstrap</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 88%"></div>
+                </div>
+                <span class="skill-pct">88%</span>
+              </div>
+            </div>
+
+            <!-- SQL -->
+            <div class="skill-box">
+              <div
+                class="skill-icon-wrapper"
+                style="background: rgba(30, 136, 229, 0.15)"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#1e88e5"
+                  stroke-width="2"
+                >
+                  <ellipse cx="12" cy="5" rx="8" ry="3" />
+                  <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
+                  <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+                </svg>
+              </div>
+              <span class="skill-name">SQL</span>
+              <div class="skill-progress-row">
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" style="--w: 87%"></div>
+                </div>
+                <span class="skill-pct">87%</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects Card -->
+        <section id="projects" class="glass-card animate-on-scroll delay-1">
+          <div class="card-header-action">
+            <h3 class="card-title" style="margin-bottom: 0">
+              <span class="card-title-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+                  ></path>
+                </svg>
+              </span>
+              <span>My Projects</span>
+            </h3>
+            <button
+              id="btn-view-all-projects"
+              class="view-all-link"
+              style="
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-family: inherit;
+              "
+            >
+              <span>View All Projects</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <div class="projects-grid" id="projects-grid">
+            <!-- Dynamically populated from Project Management System -->
+          </div>
+        </section>
+      </div>
+
+      <!-- Bottom Bento Row: Tools & Platforms + Contact Me -->
+
+      <section id="community" class="community-section animate-on-scroll">
+        <div class="community-invitation-card">
+          <div class="community-invitation-content">
+            <h2 class="community-title">Developer Community</h2>
+            <p class="community-label">Community invitation</p>
+            <div class="comm-invite-box">
+              <a
+                class="comm-invite-link"
+                id="comm-invite-url-text"
+                href="community.html"
+                >community.html</a
+              >
+              <button type="button" class="comm-btn-copy" data-copy-invite>
+                Copy Link
+              </button>
+            </div>
+            <a
+              class="community-join-button"
+              id="community-join-link"
+              href="community.html"
+              >Join Community</a
+            >
+          </div>
+          <div class="community-invitation-content community-share-content">
+            <h3 class="community-share-title">Share &amp; Invite Friends</h3>
+            <div class="comm-share-buttons">
+              <a
+                class="comm-share-btn btn-whatsapp"
+                id="btn-share-whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                >WhatsApp</a
+              >
+              <a
+                class="comm-share-btn btn-telegram"
+                id="btn-share-telegram"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Telegram</a
+              >
+              <a
+                class="comm-share-btn btn-linkedin-share"
+                id="btn-share-linkedin"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn</a
+              >
+              <button
+                type="button"
+                class="comm-share-btn btn-native-share"
+                id="btn-native-share"
+              >
+                Share
+              </button>
+              <button
+                type="button"
+                class="comm-share-btn btn-copy-share"
+                data-copy-invite
+              >
+                Copy Invitation Link
+              </button>
+            </div>
+            <p
+              class="community-copy-status"
+              id="community-copy-status"
+              aria-live="polite"
+            ></p>
+          </div>
+          <a
+            class="community-github-button"
+            href="https://github.com/nanati-abdisa"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Follow on GitHub</a
+          >
+        </div>
+      </section>
+      <div class="bento-grid-bot">
+        <!-- Tools & Platforms Card -->
+        <section class="glass-card animate-on-scroll">
+          <h3 class="card-title">
+            <span class="card-title-icon">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                ></path>
+              </svg>
+            </span>
+            <span>Tools & Platforms</span>
+          </h3>
+          <div class="tools-grid">
+            <!-- GitHub -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"
+                  />
+                </svg>
+              </div>
+              <span class="tool-name">GitHub</span>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0a66c2">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"
+                  />
+                </svg>
+              </div>
+              <span class="tool-name">LinkedIn</span>
+            </div>
+
+            <!-- VS Code -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#007acc">
+                  <path
+                    d="M17.5 2.5L7.2 10.7 2.8 7.3 1 8.2v7.6l1.8.9 4.4-3.4 10.3 8.2 5.5-2.6V5.1L17.5 2.5zM17 17.5l-6.8-5.5L17 6.5v11z"
+                  />
+                </svg>
+              </div>
+              <span class="tool-name">VS Code</span>
+            </div>
+
+            <!-- npm -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#cb3837">
+                  <path d="M1 7v10h22V7H1zm18 8h-4V9h-3v6H6V9H3v6H3V9h16v6z" />
+                </svg>
+              </div>
+              <span class="tool-name">npm</span>
+            </div>
+
+            <!-- Firebase -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffca28">
+                  <path
+                    d="M4.5 17.5L2 14.5l9-12 3 5-9.5 10zm6-8.5l3.5-5 5.5 13.5-9-8.5zm9 8.5L16 6l3.5 11.5z"
+                    fill="#ffa000"
+                  />
+                  <path
+                    d="M19.5 17.5L12 22l-8.5-4.5 8-15 3 6.5 5 8.5z"
+                    fill="#ffca28"
+                  />
+                </svg>
+              </div>
+              <span class="tool-name">Firebase</span>
+            </div>
+
+            <!-- Docker -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#2496ed">
+                  <path
+                    d="M13 8h2v2h-2V8zm-3 0h2v2h-2V8zm-3 0h2v2H7V8zm6-3h2v2h-2V5zm-3 0h2v2h-2V5zm-3 0h2v2H7V5zm15 7.5c-.5-.4-1.2-.5-1.8-.4-.4-1.2-1.3-2.1-2.5-2.4-.3 0-.6.1-.9.2-.6-1.5-2-2.4-3.6-2.4H4.5v5.5c0 .3.2.5.5.5h16.2c.4 0 .8-.2 1-.5.7-1 1.2-2.1 1.3-3.3 0-.6-.2-1.2-.5-1.6z"
+                  />
+                </svg>
+              </div>
+              <span class="tool-name">Docker</span>
+            </div>
+
+            <!-- Netlify -->
+            <div class="tool-box">
+              <div class="tool-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#00c7b7">
+                  <path
+                    d="M12 2L3 8v8l9 6 9-6V8l-9-6zm0 2.4l6.5 4.3-3.6 2.4-6.5-4.3L12 4.4zm-7 5.1l5.5 3.6-5.5 3.7V9.5zm7 5.5l5.5-3.6v7.3L12 21.6v-6.6zm-1.5-.9L4.9 18l5.6-3.7v-.2zm3-2l5.6-3.7 1.5 1-7.1 4.7v-2z"
+                  />
+                </svg>
+              </div>
+              <span class="tool-name">Netlify</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Me Card -->
+        <section id="contact" class="glass-card animate-on-scroll delay-1">
+          <div class="striped-corner"></div>
+          <h3 class="card-title">
+            <span class="card-title-icon">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </span>
+            <span>Contact Me</span>
+          </h3>
+          <div class="contact-content">
+            <div class="contact-info-block">
+              <p class="contact-sub">
+                Let's connect! Feel free to reach out for collaboration or any
+                discussion.
+              </p>
+              <div class="contact-meta-grid">
+                <a
+                  href="mailto:nanatinani912@gmail.com"
+                  class="contact-meta-link"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--pink-primary)"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    ></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  <span>nanatiabdisa@gmail.com</span>
+                </a>
+                <a
+                  href="https://github.com/nanati-abdisa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact-meta-link"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"
+                    />
+                  </svg>
+                  <span>github.com/nanati-abdisa</span>
+                </a>
+                <div class="contact-meta-link">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--pink-primary)"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span>Ethiopia</span>
+                </div>
+                <a
+                  href="https://linkedin.com/in/nanati-abdisa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact-meta-link"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="#0a66c2"
+                  >
+                    <path
+                      d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"
+                    />
+                  </svg>
+                  <span>linkedin.com/in/nanati-abdisa</span>
+                </a>
+                <a
+                  href="https://t.me/nani_1216"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact-meta-link"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M21.8 4.2 18.7 19c-.2 1-0.8 1.2-1.6.7l-4.5-3.3-2.2 2.1c-.2.2-.4.4-.8.4l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.3 13.1l-4.4-1.4c-1-.3-1-1 .2-1.5L20.4 3.8c.8-.3 1.6.2 1.4.4Z"
+                    />
+                  </svg>
+                  <span>Telegram</span>
+                </a>
+              </div>
+            </div>
+            <div class="contact-action">
+              <a
+                href="https://wa.me/251927565528"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-whatsapp-button"
+              >
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 .1 5.4.1 12c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6a12 12 0 0 0 5.8 1.5h.1c6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.7-8.4ZM12.2 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4A9.8 9.8 0 0 1 2.3 12c0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.7 9.8Zm5.4-7.3c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-1-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.1-1.3-.1-.2-.3-.3-.6-.4Z"
+                  />
+                </svg>
+                <span>Chat on WhatsApp</span>
+              </a>
+              <a
+                href="mailto:nanatinani912@gmail.com"
+                class="btn btn-primary"
+                style="padding: 14px 28px"
+              >
+                <span>Send Message</span>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>
+          © 2026 Nanati Abdisa. All rights reserved.
+          <span class="heart-icon">❤️</span> •
+          <button
+            id="btn-open-admin"
+            class="admin-portal-link"
+            title="Admin Portal"
+          >
+            🔒 Admin
+          </button>
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const totalFrames = 300;
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d", { alpha: false });
+        const frames = new Array(totalFrames);
+        let lastFrame = -1;
+        let targetProgress = 0;
+        let currentProgress = 0;
+
+        const getFrameUrl = (index) =>
+          `ezgif-frame-${String(index + 1).padStart(3, "0")}.jpg`;
+
+        const resizeCanvas = () => {
+          const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.round(window.innerWidth * pixelRatio);
+          canvas.height = Math.round(window.innerHeight * pixelRatio);
+          context.imageSmoothingEnabled = true;
+          context.imageSmoothingQuality = "high";
+          if (lastFrame >= 0) renderFrame(lastFrame, true);
+        };
+
+        const getReadyFrame = (index) => {
+          if (frames[index]?.complete && frames[index].naturalWidth > 0) {
+            return frames[index];
+          }
+          for (let distance = 1; distance < totalFrames; distance += 1) {
+            const previous = frames[index - distance];
+            if (previous?.complete && previous.naturalWidth > 0)
+              return previous;
+            const next = frames[index + distance];
+            if (next?.complete && next.naturalWidth > 0) return next;
+          }
+          return frames[0];
+        };
+
+        const renderFrame = (index, force = false) => {
+          if (index === lastFrame && !force) return;
+          const image = getReadyFrame(index);
+          if (!image?.complete || image.naturalWidth === 0) return;
+
+          const scale = Math.max(
+            canvas.width / image.naturalWidth,
+            canvas.height / image.naturalHeight,
+          );
+          const width = image.naturalWidth * scale;
+          const height = image.naturalHeight * scale;
+          context.fillStyle = "#070206";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          context.drawImage(
+            image,
+            (canvas.width - width) / 2,
+            (canvas.height - height) / 2,
+            width,
+            height,
+          );
+          lastFrame = image === frames[index] ? index : -1;
+        };
+
+        const loadFrame = (index) => {
+          const image = new Image();
+          image.src = getFrameUrl(index);
+          image.onload = () => {
+            if (index === 0 && lastFrame === -1) renderFrame(0);
+            if (lastFrame === -1) {
+              const currentIndex = Math.round(
+                currentProgress * (totalFrames - 1),
+              );
+              if (currentIndex === index) renderFrame(index);
+            }
+          };
+          frames[index] = image;
+        };
+
+        window.addEventListener("resize", resizeCanvas, { passive: true });
+        resizeCanvas();
+        [0, totalFrames - 1, 75, 150, 225].forEach(loadFrame);
+        for (let index = 0; index < totalFrames; index += 1) {
+          if (!frames[index]) loadFrame(index);
+        }
+
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = [
+          "home",
+          "about",
+          "skills",
+          "projects",
+          "community",
+          "contact",
+        ];
+
+        const updateBackgroundProgress = () => {
+          const scrollableHeight = Math.max(
+            1,
+            document.documentElement.scrollHeight - window.innerHeight,
+          );
+          targetProgress = Math.min(
+            1,
+            Math.max(0, window.scrollY / scrollableHeight),
+          );
+        };
+
+        const updateActiveSection = () => {
+          updateBackgroundProgress();
+          const scrollPos = window.pageYOffset + 240;
+          let currentSectionId = "home";
+          sections.forEach((id) => {
+            const section = document.getElementById(id);
+            if (section && section.offsetTop <= scrollPos)
+              currentSectionId = id;
+          });
+          navLinks.forEach((link) => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${currentSectionId}`,
+            );
+          });
+        };
+
+        window.addEventListener("scroll", updateActiveSection, {
+          passive: true,
+        });
+        updateActiveSection();
+
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", (event) => {
+            const target = document.getElementById(
+              anchor.getAttribute("href").slice(1),
+            );
+            if (!target) return;
+            event.preventDefault();
+            const y =
+              target.getBoundingClientRect().top + window.pageYOffset - 90;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          });
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
+        );
+
+        document
+          .querySelectorAll(".animate-on-scroll")
+          .forEach((element) => observer.observe(element));
+
+        const animateBackground = () => {
+          currentProgress += (targetProgress - currentProgress) * 0.085;
+          if (Math.abs(targetProgress - currentProgress) < 0.00005) {
+            currentProgress = targetProgress;
+          }
+          const progress =
+            currentProgress > 0.995
+              ? 1
+              : currentProgress < 0.005
+                ? 0
+                : currentProgress;
+          renderFrame(Math.round(progress * (totalFrames - 1)));
+          requestAnimationFrame(animateBackground);
+        };
+
+        requestAnimationFrame(animateBackground);
+      })();
+    </script>
+    <!-- ====================================================================
+       PMS Modals: All Projects, Admin Login, Dashboard, Form & Delete Confirm
+       ==================================================================== -->
+
+    <!-- 1. View All Projects Modal -->
+    <div id="modal-all-projects" class="pms-modal-backdrop" aria-hidden="true">
+      <div class="pms-modal pms-modal-xl">
+        <div class="pms-modal-header">
+          <div class="pms-modal-title-group">
+            <span class="card-title-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </span>
+            <h2>All Projects Archive</h2>
+            <span class="pms-badge" id="modal-projects-count">0 Projects</span>
+          </div>
+          <div class="pms-modal-controls">
+            <input
+              type="text"
+              id="projects-search-input"
+              class="pms-search-input"
+              placeholder="Search by name or tech..."
+            />
+            <button
+              class="pms-close-btn"
+              id="btn-close-all-projects"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+        <div class="pms-modal-body">
+          <div class="projects-grid modal-projects-grid" id="all-projects-grid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Admin Login Modal -->
+    <div id="modal-admin-login" class="pms-modal-backdrop" aria-hidden="true">
+      <div class="pms-modal" style="max-width: 420px">
+        <div class="pms-modal-header">
+          <div class="pms-modal-title-group">
+            <span class="card-title-icon" style="color: var(--pms-primary)"
+              >🔒</span
+            >
+            <h3>Admin Login</h3>
+          </div>
+          <button
+            class="pms-close-btn"
+            id="btn-close-admin-login"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="pms-modal-body">
+          <form id="admin-login-form">
+            <div class="pms-form-group">
+              <label class="pms-label" for="admin-password-input"
+                >Password <span>(Default: admin123)</span></label
+              >
+              <input
+                type="password"
+                id="admin-password-input"
+                class="pms-input"
+                placeholder="Enter admin password"
+                required
+                autocomplete="current-password"
+              />
+              <div id="admin-login-error" class="pms-error-text"></div>
+            </div>
+            <div
+              class="pms-form-actions"
+              style="margin-top: 10px; padding-top: 0; border-top: none"
+            >
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: 100%; justify-content: center"
+              >
+                Unlock Dashboard
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Admin Dashboard Modal -->
+    <div
+      id="modal-admin-dashboard"
+      class="pms-modal-backdrop"
+      aria-hidden="true"
+    >
+      <div class="pms-modal pms-modal-xl">
+        <div class="pms-modal-header">
+          <div class="pms-modal-title-group">
+            <span class="card-title-icon">⚙️</span>
+            <h2>Project Management Dashboard</h2>
+          </div>
+          <div class="pms-modal-controls">
+            <button class="btn btn-primary pms-btn-sm" id="btn-add-new-project">
+              + Add New Project
+            </button>
+            <button
+              class="btn btn-glass pms-btn-sm"
+              id="btn-admin-logout"
+              title="Log out"
+            >
+              Logout
+            </button>
+            <button
+              class="pms-close-btn"
+              id="btn-close-admin-dashboard"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+        <div class="pms-modal-body">
+          <div class="pms-admin-topbar">
+            <div class="pms-stats">
+              <span class="pms-stat-pill"
+                >Total Projects: <strong id="admin-total-count">0</strong></span
+              >
+              <span class="pms-stat-pill"
+                >Storage: <strong>Local + Server Sync</strong></span
+              >
+            </div>
+          </div>
+          <div class="pms-admin-list" id="admin-projects-list">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Add / Edit Project Form Modal -->
+    <div id="modal-project-form" class="pms-modal-backdrop" aria-hidden="true">
+      <div class="pms-modal" style="max-width: 680px">
+        <div class="pms-modal-header">
+          <div class="pms-modal-title-group">
+            <span class="card-title-icon">✏️</span>
+            <h3 id="form-modal-title">Add New Project</h3>
+          </div>
+          <button
+            class="pms-close-btn"
+            id="btn-close-project-form"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="pms-modal-body">
+          <form id="pms-project-form">
+            <div class="pms-form-group">
+              <label class="pms-label" for="form-proj-title"
+                >Project Name</label
+              >
+              <input
+                type="text"
+                id="form-proj-title"
+                class="pms-input"
+                placeholder="e.g. AI Study Companion"
+                required
+              />
+            </div>
+
+            <div class="pms-form-group">
+              <label class="pms-label" for="form-proj-desc"
+                >Project Description</label
+              >
+              <textarea
+                id="form-proj-desc"
+                class="pms-textarea"
+                placeholder="Describe the purpose, features and impact..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="pms-form-group">
+              <label class="pms-label" for="form-proj-tech"
+                >Programming Languages / Technologies
+                <span>(Comma separated)</span></label
+              >
+              <input
+                type="text"
+                id="form-proj-tech"
+                class="pms-input"
+                placeholder="e.g. React, Node.js, MongoDB, TypeScript"
+                required
+              />
+            </div>
+
+            <div class="pms-form-group">
+              <label class="pms-label"
+                >Project Screenshot <span>(Upload image)</span></label
+              >
+              <div class="pms-upload-area" id="pms-upload-dropzone">
+                <input
+                  type="file"
+                  id="form-proj-file"
+                  accept="image/*"
+                  style="display: none"
+                />
+                <div class="pms-upload-icon">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+                <div class="pms-upload-text">
+                  Click or drag &amp; drop screenshot here
+                </div>
+                <div class="pms-upload-subtext">
+                  PNG, JPG, WEBP or SVG (High resolution recommended)
+                </div>
+              </div>
+
+              <!-- Preview box -->
+              <div class="pms-preview-container" id="pms-preview-box">
+                <img
+                  id="pms-preview-img"
+                  class="pms-preview-img"
+                  src=""
+                  alt="Screenshot preview"
+                />
+                <button
+                  type="button"
+                  class="pms-preview-remove"
+                  id="btn-remove-preview"
+                  title="Remove screenshot"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div class="pms-form-row">
+              <div class="pms-form-group">
+                <label class="pms-label" for="form-proj-github"
+                  >GitHub Repository URL</label
+                >
+                <input
+                  type="url"
+                  id="form-proj-github"
+                  class="pms-input"
+                  placeholder="https://github.com/nanati-abdisa/..."
+                  required
+                />
+              </div>
+              <div class="pms-form-group">
+                <label class="pms-label" for="form-proj-live"
+                  >Live Demo URL</label
+                >
+                <input
+                  type="url"
+                  id="form-proj-live"
+                  class="pms-input"
+                  placeholder="https://my-app.netlify.app"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="pms-form-actions">
+              <button
+                type="button"
+                class="btn btn-glass"
+                id="btn-cancel-project-form"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save Project
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Delete Confirmation Modal -->
+    <div
+      id="modal-delete-confirm"
+      class="pms-modal-backdrop"
+      aria-hidden="true"
+    >
+      <div class="pms-modal" style="max-width: 440px">
+        <div class="pms-modal-header">
+          <div class="pms-modal-title-group">
+            <span class="card-title-icon" style="color: var(--pms-danger)"
+              >⚠️</span
+            >
+            <h3>Delete Project</h3>
+          </div>
+          <button
+            class="pms-close-btn"
+            id="btn-close-delete-modal"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="pms-modal-body">
+          <p
+            id="delete-confirm-text"
+            style="color: #f1e5ee; line-height: 1.6; margin-bottom: 20px"
+          >
+            Are you sure you want to permanently delete this project? This
+            action cannot be undone.
+          </p>
+          <div
+            class="pms-form-actions"
+            style="margin-top: 0; padding-top: 0; border-top: none"
+          >
+            <button type="button" class="btn btn-glass" id="btn-cancel-delete">
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              id="btn-confirm-delete"
+            >
+              Yes, Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PMS Toast Container -->
+    <div id="pms-toast-container"></div>
+
+    <!-- Project Management System Logic -->
+    <script src="pms.js"></script>
+
+    <script src="community.js"></script>
+  </body>
+</html>
